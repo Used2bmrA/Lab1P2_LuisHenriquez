@@ -1,12 +1,14 @@
 package lab1p2_luishenriquez;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Lab1P2_LuisHenriquez {
 
 static Scanner sc = new Scanner (System.in);
+static ArrayList<Usuario> usuarios = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Bienvenido a mi laboratorio.");
@@ -27,13 +29,16 @@ static Scanner sc = new Scanner (System.in);
                     String nombre = SolicitarNombre();
                     String apellido = SolicitarApellido();
                     Date fechaDeNacimiento = ValidarFechaDeNacimiento();
-//                    String correoElectronico = ;
-//                    String contrasena = ;
-//                    
-//                    Usuario nuevoUsuario = new Usuario(nombre, apellido, )
+                    String correoElectronico = "";
+                    String contrasena = "";
+                    
+                    Usuario nuevoUsuario = new Usuario(nombre, apellido, fechaDeNacimiento, correoElectronico, contrasena);
+                    usuarios.add(nuevoUsuario);
+                    System.out.println("Usuario agregado.\n");
+                    
                     break;
                 case 2:
-                    
+                    ListarUsuarios(usuarios);
                     
                     break;
                 case 3:
@@ -86,15 +91,19 @@ static Scanner sc = new Scanner (System.in);
              fechaIngresada = sc.nextLine();
              datosDeFecha = fechaIngresada.split("/");
              for (int i = 0; i < datosDeFecha.length - 1; i++) {
-                Integer.parseInt(datosDeFecha[i]);
+                intsDeFecha[i] = Integer.parseInt(datosDeFecha[i]);
             }
              
              fechaDeNacimiento = new Date(intsDeFecha[2], intsDeFecha[1], intsDeFecha[0]);
              fechaDeNacimientoMilis = fechaDeNacimiento.getTime();
              
-        } while (fechaDeNacimientoMilis < treceAnosMilis);
+        } while ((fechaDeNacimientoMilis - fechaMinimoMilis) < treceAnosMilis); 
         
         return fechaDeNacimiento;
+    }
+
+    private static void ListarUsuarios(ArrayList<Usuario> usuarios) {
+        
     }
     
     
