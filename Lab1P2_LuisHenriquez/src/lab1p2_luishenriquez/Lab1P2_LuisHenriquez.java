@@ -17,10 +17,10 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
         int op = 0;
         
         do {
-            System.out.println("¿Qué desea hacer?"
-                    + "1. Registrar usuario"
-                    + "2. Listar todo"
-                    + "3. Listar por dominio"
+            System.out.println("¿Qué desea hacer?\n"
+                    + "1. Registrar usuario\n"
+                    + "2. Listar todo\n"
+                    + "3. Listar por dominio\n"
                     + "4. Salir");
             
             op = sc.nextInt();
@@ -44,7 +44,7 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
                     
                     break;
                 case 3:
-                    
+                    ListarPorDominio(usuarios);
                     break;
                 case 4:
                     System.out.println("Adiós");
@@ -80,8 +80,8 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
         Date fechaMinimo = new Date(2011, 0, 19); //Una persona nacida en esta fecha tendría 13 años el 19 de enero del 2024
         Date fechaDeNacimiento;
         String fechaIngresada = "";
-        String datosDeFecha[] = new String [3];
-        int intsDeFecha[] = new int [3];
+        String[] datosDeFecha = new String [3];
+        int[] intsDeFecha = new int [3];
         long fechaMinimoMilis = fechaMinimo.getTime(); //Tiempo desde 1970 hasta 19 de enero del 2011
         long treceAnosMilis = 1000*60*60*24*365*13; //MiliSegundos que tiene una persona al cumplir trece años
         long fechaDeNacimientoMilis;
@@ -96,10 +96,10 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
                 intsDeFecha[i] = Integer.parseInt(datosDeFecha[i]);
             }
              
-             fechaDeNacimiento = new Date(intsDeFecha[2], intsDeFecha[1], intsDeFecha[0]);
+             fechaDeNacimiento = new Date(intsDeFecha[2], intsDeFecha[1] - 1, intsDeFecha[0]);
              fechaDeNacimientoMilis = fechaDeNacimiento.getTime();
              
-        } while ((fechaDeNacimientoMilis - fechaMinimoMilis) < treceAnosMilis); 
+        } while ((fechaDeNacimientoMilis - fechaMinimoMilis) > treceAnosMilis); 
         
         return fechaDeNacimiento;
     }
@@ -123,7 +123,8 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
         do {
             System.out.println("Ingrese su correo:");
             email = sc.nextLine();
-        } while (!ValidarCorreo(email));
+        } while (!ValidarCorreo(email) && !EmailInvalido(email));
+        
         
         return email;
     }
@@ -144,8 +145,21 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
         
         return contrasena;
     }
-    
-    
-    
-    
+
+    private static boolean EmailInvalido(String email) {
+        String[] dominios= {"Gmail", "Outlook", "Yahoo", "iCloud", "ProtonMail", "FastMail"};
+        
+        
+        for (int i = 0; i < dominios.length - 1; i++) {
+            if (email.contains(dominios[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static void ListarPorDominio(ArrayList<Usuario> usuarios) {
+        
+    }
+
 }
