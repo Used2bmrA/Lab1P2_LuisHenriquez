@@ -1,5 +1,7 @@
 package lab1p2_luishenriquez;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Lab1P2_LuisHenriquez {
@@ -24,13 +26,14 @@ static Scanner sc = new Scanner (System.in);
                 case 1:
                     String nombre = SolicitarNombre();
                     String apellido = SolicitarApellido();
-                    Date fechaDeNacimiento = ;
-                    String correoElectronico = ;
-                    String contrasena = ;
-                    
-                    Usuario nuevoUsuario = new Usuario(nombre, apellido, )
+                    Date fechaDeNacimiento = ValidarFechaDeNacimiento();
+//                    String correoElectronico = ;
+//                    String contrasena = ;
+//                    
+//                    Usuario nuevoUsuario = new Usuario(nombre, apellido, )
                     break;
                 case 2:
+                    
                     
                     break;
                 case 3:
@@ -52,6 +55,7 @@ static Scanner sc = new Scanner (System.in);
             System.out.println("Ingrese su nombre:");
             nombre = sc.nextLine();
         } while (nombre.equals(""));
+        
         return nombre;
     }
 
@@ -61,6 +65,28 @@ static Scanner sc = new Scanner (System.in);
             System.out.println("Ingrese su nombre:");
             apellido = sc.nextLine();
         } while (apellido.equals(""));
+        
         return apellido;
+    }
+
+    private static Date ValidarFechaDeNacimiento() {
+        Date fechaMinimo = new Date(2011, 0, 19);
+        Date fechaDeNacimiento;
+        String fechaIngresada = "";
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        String datos[] = new String [3];
+        
+        
+        do {
+            System.out.println("Ingrese su fecha de nacimiento en formato \"dd/mm/yyyy\":");
+             fechaIngresada = sc.nextLine();
+             datos = fechaIngresada.split("/");
+             for (int i = 0; i < datos.length - 1; i++) {
+                Integer.parseInt(datos[i]);
+            }
+             fechaDeNacimiento = new Date(0, 0, 0);
+        } while (fechaDeNacimiento.after(fechaMinimo));
+        
+        return fechaDeNacimiento;
     }
 }
