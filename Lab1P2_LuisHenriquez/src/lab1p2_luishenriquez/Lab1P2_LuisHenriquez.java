@@ -69,7 +69,7 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
     private static String SolicitarApellido() {
         String apellido = "";
         do {
-            System.out.println("Ingrese su nombre:");
+            System.out.println("Ingrese su apellido:");
             apellido = sc.nextLine();
         } while (apellido.equals(""));
         
@@ -106,7 +106,7 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
 
     private static void ListarUsuarios(ArrayList<Usuario> usuarios) {
         
-        for (int i = 0; i < usuarios.size() - 1; i++) {
+        for (int i = 0; i < usuarios.size(); i++) {
             System.out.println((i+1) + ". " + usuarios.get(i).toString());
         }
     }
