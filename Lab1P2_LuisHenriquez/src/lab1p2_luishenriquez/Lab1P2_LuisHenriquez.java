@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Lab1P2_LuisHenriquez {
 
@@ -29,8 +31,8 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
                     String nombre = SolicitarNombre();
                     String apellido = SolicitarApellido();
                     Date fechaDeNacimiento = ValidarFechaDeNacimiento();
-                    String correoElectronico = "";
-                    String contrasena = "";
+                    String correoElectronico = SolicitarCorreo();
+                    String contrasena = SolicitarContrasena();
                     
                     Usuario nuevoUsuario = new Usuario(nombre, apellido, fechaDeNacimiento, correoElectronico, contrasena);
                     usuarios.add(nuevoUsuario);
@@ -104,7 +106,46 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
 
     private static void ListarUsuarios(ArrayList<Usuario> usuarios) {
         
+        for (int i = 0; i < usuarios.size() - 1; i++) {
+            System.out.println((i+1) + ". " + usuarios.get(i).toString());
+        }
     }
+
+    private static boolean ValidarCorreo(String email) {
+        String regex = "^[a-zA-Z0-9._%&$+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    private static String SolicitarCorreo() {
+        String email;
+        do {
+            System.out.println("Ingrese su correo:");
+            email = sc.nextLine();
+        } while (!ValidarCorreo(email));
+        
+        return email;
+    }
+    
+    private static boolean ValidarContrasena(String contrasena) {
+        String regex = "^[a-zA-Z0-9!?<>$%]$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(contrasena);
+        return matcher.matches();
+    }
+
+    private static String SolicitarContrasena() {
+        String contrasena;
+        do {
+            System.out.println("Ingrese su contraseña:");
+            contrasena = sc.nextLine();
+        } while (!ValidarContrasena(contrasena) || contrasena.length() < 8);
+        
+        return contrasena;
+    }
+    
+    
     
     
 }
