@@ -130,7 +130,7 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
     }
     
     private static boolean ValidarContrasena(String contrasena) {
-        String regex = "^[a-zA-Z0-9!?<>$%]$";
+        String regex = "^[a-zA-Z0-9._%&$+-?<>!]{8,}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(contrasena);
         return matcher.matches();
@@ -141,7 +141,7 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
         do {
             System.out.println("Ingrese su contraseña:");
             contrasena = sc.nextLine();
-        } while (!ValidarContrasena(contrasena) || contrasena.length() < 8);
+        } while (!ValidarContrasena(contrasena));
         
         return contrasena;
     }
@@ -159,6 +159,38 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
     }
 
     private static void ListarPorDominio(ArrayList<Usuario> usuarios) {
+        ArrayList<Usuario> gmail = new ArrayList<>();
+        ArrayList<Usuario> outlook = new ArrayList<>();
+        ArrayList<Usuario> yahoo = new ArrayList<>();
+        ArrayList<Usuario> icloud = new ArrayList<>();
+        ArrayList<Usuario> protonmail = new ArrayList<>();
+        ArrayList<Usuario> fastmail = new ArrayList<>();
+            
+        for (int i = 0; i < usuarios.size() - 1; i++) {
+            String dominioActual = usuarios.get(i).getCorreoElectronico();
+            
+            
+            if (dominioActual.contains("Gmail")) {
+                gmail.add(usuarios.get(i));
+            }else if(dominioActual.contains("Outlook")){
+                outlook.add(usuarios.get(i));
+            }else if (dominioActual.contains("Yahoo")){
+                yahoo.add(usuarios.get(i));
+            }else if(dominioActual.contains("iCloud")){
+                icloud.add(usuarios.get(i));
+            }else if(dominioActual.contains("ProtonMail")){
+                protonmail.add(usuarios.get(i));
+            }else{
+                fastmail.add(usuarios.get(i));
+            }
+        } //Separa los usuarios por dominio
+        
+        ListarUsuarios(gmail);
+        ListarUsuarios(outlook);
+        ListarUsuarios(yahoo);
+        ListarUsuarios(icloud);
+        ListarUsuarios(protonmail);
+        ListarUsuarios(fastmail);
         
     }
 

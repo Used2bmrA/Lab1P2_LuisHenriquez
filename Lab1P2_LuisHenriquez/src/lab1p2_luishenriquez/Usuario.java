@@ -1,6 +1,5 @@
 package lab1p2_luishenriquez;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Usuario {
@@ -10,7 +9,6 @@ Date fechaDeNacimiento;
 String correoElectronico;
 String contrasena;
 
-static SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
 
     public Usuario(String nombre, String apellido, Date fechaDeNacimiento, String correoElectronico, String contrasena) {
         this.nombre = nombre;
@@ -18,6 +16,10 @@ static SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.correoElectronico = correoElectronico;
         this.contrasena = contrasena;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
     }
 
     @Override
