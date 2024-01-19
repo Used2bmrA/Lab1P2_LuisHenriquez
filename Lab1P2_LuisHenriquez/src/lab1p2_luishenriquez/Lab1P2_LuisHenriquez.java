@@ -70,23 +70,32 @@ static Scanner sc = new Scanner (System.in);
     }
 
     private static Date ValidarFechaDeNacimiento() {
-        Date fechaMinimo = new Date(2011, 0, 19);
+        Date fechaMinimo = new Date(2011, 0, 19); //Una persona nacida en esta fecha tendría 13 años el 19 de enero del 2024
         Date fechaDeNacimiento;
         String fechaIngresada = "";
-        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
-        String datos[] = new String [3];
+        String datosDeFecha[] = new String [3];
+        int intsDeFecha[] = new int [3];
+        long fechaMinimoMilis = fechaMinimo.getTime(); //Tiempo desde 1970 hasta 19 de enero del 2011
+        long treceAnosMilis = 1000*60*60*24*365*13; //MiliSegundos que tiene una persona al cumplir trece años
+        long fechaDeNacimientoMilis;
         
         
         do {
+            System.out.println("Debes tener 13 años para unirte.");
             System.out.println("Ingrese su fecha de nacimiento en formato \"dd/mm/yyyy\":");
              fechaIngresada = sc.nextLine();
-             datos = fechaIngresada.split("/");
-             for (int i = 0; i < datos.length - 1; i++) {
-                Integer.parseInt(datos[i]);
+             datosDeFecha = fechaIngresada.split("/");
+             for (int i = 0; i < datosDeFecha.length - 1; i++) {
+                Integer.parseInt(datosDeFecha[i]);
             }
-             fechaDeNacimiento = new Date(0, 0, 0);
-        } while (fechaDeNacimiento.after(fechaMinimo));
+             
+             fechaDeNacimiento = new Date(intsDeFecha[2], intsDeFecha[1], intsDeFecha[0]);
+             fechaDeNacimientoMilis = fechaDeNacimiento.getTime();
+             
+        } while (fechaDeNacimientoMilis < treceAnosMilis);
         
         return fechaDeNacimiento;
     }
+    
+    
 }
