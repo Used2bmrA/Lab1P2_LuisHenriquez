@@ -27,24 +27,25 @@ String contrasena;
         return "Usuario: " + "Nombre: " + nombre + ", Apellido: " + apellido + ", Edad: " + ToDMY(fechaDeNacimiento) + ", Correo Electronico: " + correoElectronico + ", Contrasena: " + contrasena;
     }
     
-    private static String ToDMY(Date fecha){
-        long milisDeFechaNacimiento = fecha.getTime(); //Milis desde 1970 hasta fecha de nacimiento
+    private static String ToDMY(Date fechaDeNacimiento){
+        long milisFechaNacimiento = fechaDeNacimiento.getTime(); //Milis desde 1970 hasta fecha de nacimiento
         Date fechaActual = new Date();
-        long milisFechaActual = fechaActual.getTime(); //Milis hasta fecha actual
-        long tiempoTotalDeVida = milisFechaActual - milisDeFechaNacimiento; //Milis total de tiempo de vida
+        long milisFechaActual = fechaActual.getTime(); //Milis desde 1970 hasta la fecha actual
+        long tiempoTotalDeVida = milisFechaActual - milisFechaNacimiento; //Milis total de tiempo de vida
         int anos = 0;
         int meses = 0;
         int dias = 0;
         String edadTotal;
         
+        
         while (tiempoTotalDeVida >= 1000*60*60*24*365) {
-            tiempoTotalDeVida -= 1000*60*60*24*365;
             anos ++;
+            tiempoTotalDeVida -= 1000*60*60*24*365;
         }
         
         while (tiempoTotalDeVida >= 1000*60*60*24) {
-            tiempoTotalDeVida -= 1000*60*60*24;
             dias ++;
+            tiempoTotalDeVida -= 1000*60*60*24;
         }
         
         while (dias >= 31) {
@@ -52,7 +53,7 @@ String contrasena;
             meses ++;
         }
         
-        edadTotal = anos + " años," + meses + " meses, " + dias + " dias.";
+        edadTotal = anos + " años," + meses + " meses, " + dias + " dias";
         
         return edadTotal;
     }

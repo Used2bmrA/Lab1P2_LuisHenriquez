@@ -92,13 +92,13 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
             System.out.println("Ingrese su fecha de nacimiento en formato \"dd/mm/yyyy\":");
              fechaIngresada = sc.nextLine();
              datosDeFecha = fechaIngresada.split("/");
-             for (int i = 0; i < datosDeFecha.length - 1; i++) {
+             for (int i = 0; i < datosDeFecha.length; i++) {
                 intsDeFecha[i] = Integer.parseInt(datosDeFecha[i]);
             }
              
-             fechaDeNacimiento = new Date(intsDeFecha[2], intsDeFecha[1] - 1, intsDeFecha[0]);
+             fechaDeNacimiento = new Date(intsDeFecha[2] - 1900, intsDeFecha[1] - 1, intsDeFecha[0]);
              fechaDeNacimientoMilis = fechaDeNacimiento.getTime();
-             
+
         } while ((fechaDeNacimientoMilis - fechaMinimoMilis) > treceAnosMilis); 
         
         return fechaDeNacimiento;
@@ -166,7 +166,7 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
         ArrayList<Usuario> protonmail = new ArrayList<>();
         ArrayList<Usuario> fastmail = new ArrayList<>();
             
-        for (int i = 0; i < usuarios.size() - 1; i++) {
+        for (int i = 0; i < usuarios.size(); i++) {
             String dominioActual = usuarios.get(i).getCorreoElectronico();
             
             String[] t = dominioActual.split("@");
@@ -186,12 +186,42 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
             }
         } //Separa los usuarios por dominio
         
-        ListarUsuarios(gmail);
-        ListarUsuarios(outlook);
-        ListarUsuarios(yahoo);
-        ListarUsuarios(icloud);
-        ListarUsuarios(protonmail);
-        ListarUsuarios(fastmail);
+        if (gmail.isEmpty()) {
+            System.out.println("No hay usuarios de Gmail.");
+        }else{
+            System.out.println("Los usuarios de Gmail son: ");
+            ListarUsuarios(gmail);
+        }
+        if (outlook.isEmpty()) {
+            System.out.println("No hay usuarios de Outlook.");
+        }else{
+            System.out.println("Los usuarios de Outlook son: ");
+            ListarUsuarios(outlook);
+        }
+        if (yahoo.isEmpty()) {
+            System.out.println("No hay usuarios de Yahoo.");
+        }else{
+            System.out.println("Los usuarios de Yahoo son: ");
+            ListarUsuarios(yahoo);
+        }
+        if (icloud.isEmpty()) {
+            System.out.println("No hay usuarios de iCloud.");
+        }else{
+            System.out.println("Los usuarios de iCloud son: ");
+            ListarUsuarios(icloud);
+        }
+        if (protonmail.isEmpty()) {
+            System.out.println("No hay usuarios de ProtonMail.");
+        }else{
+            System.out.println("Los usuarios de ProtonMail son: ");
+            ListarUsuarios(protonmail);
+        }
+        if (fastmail.isEmpty()) {
+            System.out.println("No hay usuarios de FastMail.");
+        }else{
+            System.out.println("Los usuarios de FastMail son: ");
+            ListarUsuarios(fastmail);
+        }
         
     }
 
