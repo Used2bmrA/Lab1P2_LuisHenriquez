@@ -123,7 +123,7 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
         do {
             System.out.println("Ingrese su correo:");
             email = sc.nextLine();
-        } while (!ValidarCorreo(email) && !EmailInvalido(email));
+        } while (!ValidarCorreo(email) && !DominioInvalido(email));
         
         
         return email;
@@ -146,7 +146,7 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
         return contrasena;
     }
 
-    private static boolean EmailInvalido(String email) {
+    private static boolean DominioInvalido(String email) {
         String[] dominios= {"Gmail", "Outlook", "Yahoo", "iCloud", "ProtonMail", "FastMail"};
         
         
@@ -169,19 +169,20 @@ static ArrayList<Usuario> usuarios = new ArrayList<>();
         for (int i = 0; i < usuarios.size() - 1; i++) {
             String dominioActual = usuarios.get(i).getCorreoElectronico();
             
+            String[] t = dominioActual.split("@");
             
-            if (dominioActual.contains("Gmail")) {
+            if (t[1].equalsIgnoreCase("gmail.com")) {
                 gmail.add(usuarios.get(i));
-            }else if(dominioActual.contains("Outlook")){
+            }else if(t[1].equalsIgnoreCase("outlook.com")){
                 outlook.add(usuarios.get(i));
-            }else if (dominioActual.contains("Yahoo")){
+            }else if (t[1].equalsIgnoreCase("yahoo.com")){
                 yahoo.add(usuarios.get(i));
-            }else if(dominioActual.contains("iCloud")){
+            }else if(t[1].equalsIgnoreCase("icloud.com")){
                 icloud.add(usuarios.get(i));
-            }else if(dominioActual.contains("ProtonMail")){
+            }else if(t[1].equalsIgnoreCase("protonmail")){
                 protonmail.add(usuarios.get(i));
-            }else{
-                fastmail.add(usuarios.get(i));
+            }else if (t[1].equalsIgnoreCase("fastmail")) {
+                gmail.add(usuarios.get(i));
             }
         } //Separa los usuarios por dominio
         
